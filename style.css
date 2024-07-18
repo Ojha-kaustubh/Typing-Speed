@@ -1,0 +1,140 @@
+/* Global reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+  
+  body {
+    min-height: 100vh;
+    display: flex;
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0; /* Updated background color */
+  }
+  
+  .wrapper {
+    max-width: 100%;
+    width: 770px;
+    padding: 35px;
+    background-color: #ffffff; /* White background */
+    border-radius: 10px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
+  }
+  
+  .content-box {
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #bfbfbf;
+  }
+  
+  .input-field {
+    position: absolute;
+    opacity: 0;
+    z-index: -99;
+  }
+  
+  .content {
+    margin-top: 17px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Added gap between flex items */
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid #bfbfbf;
+  }
+  
+  .result-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Added gap between flex items */
+    align-items: center;
+    justify-content: space-between;
+    width: calc(100% - 140px);
+  }
+  
+  .result-details li {
+    display: flex;
+    align-items: center;
+    list-style: none;
+  }
+  
+  .content button {
+    width: 105px;
+    padding: 8px 0;
+    font-size: 16px;
+    color: #ffffff; /* White text color */
+    background-color: #ff7f50; /* Coral button color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .content button:hover {
+    background-color: #ff6347; /* Lighter shade of coral on hover */
+  }
+  
+  .content button:active {
+    transform: scale(0.97);
+  }
+  
+  .typing-text p span {
+    position: relative;
+  }
+  
+  .typing-text p span.active {
+    color: orange;
+  }
+  
+  .typing-text p span.correct {
+    color: green;
+  }
+  
+  .typing-text p span.incorrect {
+    color: red;
+    background: #ffc0cb;
+    border-radius: 4px;
+    outline: 1px solid #fff;
+  }
+  
+  ::selection {
+    color: #fff;
+    background: #ff7f50; /* Matching button color for selection */
+  }
+  
+  /* Responsive design */
+  @media (max-width: 1024px) {
+    .wrapper {
+      width: 90%;
+      max-width: 100%;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .wrapper {
+      padding: 25px;
+    }
+  
+    .content-box {
+      padding: 15px;
+    }
+  
+    .content {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  
+    .result-details {
+      width: 100%;
+    }
+  
+    .content button {
+      width: 100%;
+    }
+  }
+  
