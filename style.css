@@ -1,140 +1,133 @@
-/* Global reset and base styles */
+/* CSS Reset */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-  }
-  
-  body {
-    min-height: 100vh;
-    display: flex;
-    padding: 20px;
-    align-items: center;
-    justify-content: center;
-    background-color: #f0f0f0; /* Updated background color */
-  }
-  
-  .wrapper {
-    max-width: 100%;
-    width: 770px;
-    padding: 35px;
-    background-color: #ffffff; /* White background */
-    border-radius: 10px;
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
-  }
-  
-  .content-box {
-    padding: 20px;
-    border-radius: 10px;
-    border: 1px solid #bfbfbf;
-  }
-  
-  .input-field {
-    position: absolute;
-    opacity: 0;
-    z-index: -99;
-  }
-  
-  .content {
-    margin-top: 17px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px; /* Added gap between flex items */
-    align-items: center;
-    justify-content: space-between;
-    border-top: 1px solid #bfbfbf;
-  }
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #0C0C0C;
+  color: #F2F2F2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.wrapper {
+  background-color: #1B1B1B;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 18px;
+  background-color: #292929;
+  color: #F2F2F2;
+}
+
+.input-field:focus {
+  outline: none;
+  border: 2px solid #F2613F;
+}
+
+.content-box {
+  margin-bottom: 20px;
+}
+
+.typing-text {
+  margin-bottom: 20px;
+}
+
+.typing-text p {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #292929;
+  padding: 10px;
+  border-radius: 6px;
+  min-height: 60px;
+}
+
+.typing-text p span {
+  font-size: 18px;
+  margin-right: 2px;
+}
+
+.typing-text p span.correct {
+  color: #4CAF50;
+}
+
+.typing-text p span.incorrect {
+  color: #F2613F;
+}
+
+.result-details {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.result-details li {
+  text-align: center;
+}
+
+.result-details li p {
+  margin-bottom: 5px;
+}
+
+#start-btn, #try-again-btn {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 18px;
+  background-color: #9B3922;
+  color: #F2F2F2;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+#set-time {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 18px;
+  background-color: #292929;
+  color: #F2F2F2;
+}
+
+#start-btn:hover, #try-again-btn:hover {
+  background-color: #F2613F;
+}
+
+.info {
+  text-align: center;
+}
+
+.info p {
+  margin-bottom: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
   .result-details {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px; /* Added gap between flex items */
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    width: calc(100% - 140px);
   }
-  
+
   .result-details li {
-    display: flex;
-    align-items: center;
-    list-style: none;
+    margin-bottom: 10px;
   }
-  
-  .content button {
-    width: 105px;
-    padding: 8px 0;
-    font-size: 16px;
-    color: #ffffff; /* White text color */
-    background-color: #ff7f50; /* Coral button color */
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    outline: none;
-    transition: background-color 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .content button:hover {
-    background-color: #ff6347; /* Lighter shade of coral on hover */
-  }
-  
-  .content button:active {
-    transform: scale(0.97);
-  }
-  
-  .typing-text p span {
-    position: relative;
-  }
-  
-  .typing-text p span.active {
-    color: orange;
-  }
-  
-  .typing-text p span.correct {
-    color: green;
-  }
-  
-  .typing-text p span.incorrect {
-    color: red;
-    background: #ffc0cb;
-    border-radius: 4px;
-    outline: 1px solid #fff;
-  }
-  
-  ::selection {
-    color: #fff;
-    background: #ff7f50; /* Matching button color for selection */
-  }
-  
-  /* Responsive design */
-  @media (max-width: 1024px) {
-    .wrapper {
-      width: 90%;
-      max-width: 100%;
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .wrapper {
-      padding: 25px;
-    }
-  
-    .content-box {
-      padding: 15px;
-    }
-  
-    .content {
-      flex-direction: column;
-      align-items: stretch;
-    }
-  
-    .result-details {
-      width: 100%;
-    }
-  
-    .content button {
-      width: 100%;
-    }
-  }
-  
+}
