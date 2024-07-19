@@ -1,10 +1,12 @@
 const typingText = document.querySelector(".typing-text p");
 const input = document.querySelector(".wrapper .input-field");
 const time = document.querySelector(".time span b");
-const mistakes = document.querySelector(".mistake span");
+const mistakes = document.querySelector(".mistake span ");
 const wpm = document.querySelector(".wpm span");
 const cpm = document.querySelector(".cpm span");
-const btn = document.querySelector("button");
+const accuracyEl = document.querySelector(".accuracy span");
+const tryAgainBtn = document.querySelector("#try-again-btn");
+const setTimeEl = document.querySelector("#set-time");
 
 function loadParagraph() {
   const paragraphs = [
@@ -25,73 +27,110 @@ function loadParagraph() {
     typingText.innerHTML += `<span>${char}</span>`;
   }
 
-
-  const firstSpan = document.querySelectorAll('span')[0];
+  const firstSpan = document.querySelectorAll("span")[0];
   if (firstSpan) {
-    firstSpan.classList.add('active');
+    firstSpan.classList.add("active");
   }
-
-document.addEventListener('keydown',()=>input.focus());
-document.addEventListener("click",()=>{
-    input.focus()})
 }
 
-input.addEventListener('input', initTyping);
+document.addEventListener("keydown", () => input.focus());
 
 let timer;
-const maxTime = 60;
+let maxTime = 30;
 let leftTime = maxTime;
 let charIndex = 0;
 let isTyping = false;
 let mistakeCount = 0;
 let correctChars = 0;
 let totalChars = 0;
+let accuracy = 0;
+
+//updating max time
+
+setTimeEl.addEventListener("change", (e) => {
+  maxTime = e.target.value;
+  time.textContent = maxTime;
+});
+time.textContent = maxTime;
+
+// starting game
+
+function startGame() {
+  loadParagraph();
+  reset();
+  startTimer();
+}
+
+document.querySelector("#start-btn").addEventListener("click", startGame);
+
+document.addEventListener("keydown", (e) => {
+  if (e.code === "Escape") {
+    reset();
+  }
+  if (e.code === "Enter") startGame();
+});
+
+//
+
+input.addEventListener("input", initTyping);
 
 function initTyping() {
-  const char = typingText.querySelectorAll('span');
+  if (!isTyping) {
+    isTyping = true;
+  }
+
+  console.log(maxTime);
+  const char = Array.from(typingText.querySelectorAll("span"));
   const typedItem = input.value.charAt(charIndex);
 
   if (charIndex < char.length && leftTime > 0) {
-    if (char[charIndex].innerHTML === typedItem) {
-      char[charIndex].classList.add('correct');
-      // correctChars++;
-
+    if (char[charIndex].textContent === typedItem) {
+      char[charIndex].classList.add("correct");
+      correctChars++;
     } else {
-      char[charIndex].classList.add('incorrect');
+      char[charIndex].classList.add("incorrect");
       mistakeCount++;
-      mistakes.innerHTML = mistakeCount;
     }
 
     charIndex++;
-    // totalChars++;
+    totalChars++;
   } else {
     clearInterval(timer);
 
-
-    const correctWords = correctChars / 5; 
+    const correctWords = correctChars / 5;
     const wpmValue = (correctWords / (maxTime / 60)).toFixed(2);
     const cpmValue = ((correctChars / maxTime) * 60).toFixed(2);
+    const accuracy = ((correctChars / totalChars) * 100).toFixed(2);
 
+    mistakes.textContent = mistakeCount;
     wpm.innerHTML = wpmValue;
-    cpm.innerHTML = cpmValue;
+    cpm.textContent = cpmValue;
+    accuracyEl.textContent = `${accuracy}%`;
   }
 }
 
-btn.addEventListener('click', tryAgain);
+tryAgainBtn.addEventListener("click", () => {
+  reset();
+  startGame();
+});
 
-function tryAgain() {
-  loadParagraph();
+function reset() {
+  input.value = "";
   clearInterval(timer);
   charIndex = 0;
   mistakeCount = 0;
   correctChars = 0;
   totalChars = 0;
-  mistakes.innerHTML = 0;
-  wpm.innerHTML = 0;
-  cpm.innerHTML = 0;
-  time.innerHTML = maxTime;
-
-  startTimer();
+  accuracy = 0;
+  isTyping = false;
+  mistakes.textContent = 0;
+  wpm.textContent = 0;
+  cpm.textContent = 0;
+  time.textContent = maxTime;
+  accuracyEl.textContent = "0%";
+  typingText.querySelectorAll("span").forEach((span) => {
+    span.classList.remove("correct", "incorrect", "active");
+  });
 }
 
 function startTimer() {
@@ -105,6 +144,3 @@ function startTimer() {
     }
   }, 1000);
 }
-
-loadParagraph();
-startTimer();
