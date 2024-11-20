@@ -14,6 +14,8 @@ function loadParagraph() {
     "You are the most important person in your whole life.",
     "Always be true to who you are, and ignore what other people have to say about you.",
     "Only demonstrate your strength when it’s really required.",
+    "We cannot solve problems with the kind of thinking we employed when we came up with them."
+    "Calmness, gentleness, silence, self-restraint, and purity: these are the disciplines of the mind",
     "“There are three gates to self-destruction and hell; Lust, Anger & Greed",
     "Among all kinds of killers, time is the ultimate because time kills everything.",
     "Calmness, gentleness, silence, self-restraint, and purity: these are the disciplines of the mind",
