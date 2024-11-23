@@ -133,8 +133,7 @@ function reset() {
   typingText.querySelectorAll("span").forEach((span) => {
     span.classList.remove("correct", "incorrect", "active");
   });
-}
-
+}
 function startTimer() {
   leftTime = maxTime;
   timer = setInterval(() => {
